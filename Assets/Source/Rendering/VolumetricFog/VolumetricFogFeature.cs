@@ -1,18 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
-public class VolumetricFogFeature : MonoBehaviour
+namespace VertexFragment
 {
-    // Start is called before the first frame update
-    void Start()
+    public sealed class VolumetricFogFeature : ScriptableRendererFeature
     {
-        
-    }
+        public VolumetricFogSettings Settings = new VolumetricFogSettings();
+        private VolumetricFogPass Pass;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override void Create()
+        {
+            Pass = new VolumetricFogPass(Settings);
+        }
+
+        public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
+        {
+            if (renderingData.cameraData.camera != Camera.main)
+            {
+                return;
+            }
+
+            renderer.EnqueuePass(Pass);
+        }
+
+        [System.Serializable]
+        public sealed class VolumetricFogSettings
+        {
+            public RenderPassEvent Event = RenderPassEvent.BeforeRenderingPostProcessing;
+            public Material VolumetricFogMaterial;
+            public bool InstantiateMaterial;
+        }
     }
 }

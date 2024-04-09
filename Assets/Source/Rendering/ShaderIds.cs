@@ -175,10 +175,10 @@ namespace VertexFragment
         // Custom
         // ---------------------------------------------------------------------------------
 
-        // Blit
         public static readonly int BlitTexture = Shader.PropertyToID("_BlitTexture");
         public static readonly int BlitCopyTexture = Shader.PropertyToID("_BlitCopyTexture");
         public static readonly int BlitCopyDepthTexture = Shader.PropertyToID("_BlitCopyDepthTexture");
         public static readonly int CameraColorTexture = Shader.PropertyToID("_CameraColorTexture");
+        public static readonly int BoundingSphere = Shader.PropertyToID("_BoundingSphere");
     }
 }
