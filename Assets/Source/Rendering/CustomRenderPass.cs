@@ -55,10 +55,10 @@ namespace VertexFragment
 
         public CustomRenderPass()
         {
-            BlitCopyMaterial = CoreUtils.CreateEngineMaterial("UOP/BlitCopy");
-            BlitBlendMaterial = CoreUtils.CreateEngineMaterial("UOP/BlitBlend");
-            BlitDepthCopyMaterial = CoreUtils.CreateEngineMaterial("UOP/BlitDepthCopy");
-            BlitTransparencyDepthCopyMaterial = CoreUtils.CreateEngineMaterial("UOP/BlitTransparencyDepthCopy");
+            BlitCopyMaterial = CoreUtils.CreateEngineMaterial("VertexFragment/BlitCopy");
+            BlitBlendMaterial = CoreUtils.CreateEngineMaterial("VertexFragment/BlitBlend");
+            BlitDepthCopyMaterial = CoreUtils.CreateEngineMaterial("VertexFragment/BlitDepthCopy");
+            BlitTransparencyDepthCopyMaterial = CoreUtils.CreateEngineMaterial("VertexFragment/BlitTransparencyDepthCopy");
 
             if (TriangleMesh == null)
             {
