@@ -119,13 +119,13 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _FogCutOff: 0.25
-    - _FogDensity: 1.5
-    - _FogDetailStrength: 0.5
+    - _FogDensity: 0.75
+    - _FogDetailStrength: 0.4
     - _FogExponent: 1
     - _FogFadeEdge: 20
-    - _FogFadeY: 30
-    - _FogMaxY: 50
-    - _FogProximityFade: 10
+    - _FogFadeY: 20
+    - _FogMaxY: 500
+    - _FogProximityFade: 15
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -136,7 +136,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ShadowReverseStrength: 0.3
-    - _ShadowStrength: 0.9
+    - _ShadowStrength: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -149,12 +149,12 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BoundingSphere: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DetailFogTiling: {r: 0.05, g: 0.05, b: 0.05, a: 0}
-    - _DirectionalFogColor: {r: 1.4056604, g: 1.8816298, b: 2, a: 0.9019608}
+    - _DetailFogTiling: {r: 0.001, g: 0.001, b: 0.001, a: 0}
+    - _DirectionalFogColor: {r: 1.4056604, g: 1.8816298, b: 2, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FogColor: {r: 0.5254902, g: 0.69803923, b: 0.67058825, a: 0.9019608}
-    - _FogSpeed: {r: 2, g: -0.25, b: 0.25, a: 0}
-    - _FogTiling: {r: 0.0075, g: 0.0075, b: 0.0075, a: 0}
+    - _FogColor: {r: 0.5254902, g: 0.69803923, b: 0.67058825, a: 1}
+    - _FogSpeed: {r: 10, g: -1, b: -5, a: 0}
+    - _FogTiling: {r: 0.0015, g: 0.0015, b: 0.0015, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -53,6 +53,16 @@ namespace VertexFragment
         /// </summary>
         protected static CustomMesh QuadMesh;
 
+        /// <summary>
+        /// Width of the camera, in pixels, the previous frame.
+        /// </summary>
+        private int PreviousCameraWidth;
+
+        /// <summary>
+        /// Height of the camera, in pixels, the previous frame.
+        /// </summary>
+        private int PreviousCameraHeight;
+
         public CustomRenderPass()
         {
             BlitCopyMaterial = CoreUtils.CreateEngineMaterial("VertexFragment/BlitCopy");
@@ -80,6 +90,24 @@ namespace VertexFragment
                 QuadMesh.AddFace(ll, lr, ur, ul);
                 QuadMesh.Build();
             }
+        }
+
+        /// <summary>
+        /// Detects if the camera pixel size has changed.
+        /// </summary>
+        /// <param name="renderingData"></param>
+        /// <returns></returns>
+        protected bool HasCameraResized(ref RenderingData renderingData)
+        {
+            if ((renderingData.cameraData.camera.pixelWidth != PreviousCameraWidth) || (renderingData.cameraData.camera.pixelHeight != PreviousCameraHeight))
+            {
+                PreviousCameraWidth = renderingData.cameraData.camera.pixelWidth;
+                PreviousCameraHeight = renderingData.cameraData.camera.pixelHeight;
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

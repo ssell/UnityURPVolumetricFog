@@ -180,5 +180,7 @@ namespace VertexFragment
         public static readonly int BlitCopyDepthTexture = Shader.PropertyToID("_BlitCopyDepthTexture");
         public static readonly int CameraColorTexture = Shader.PropertyToID("_CameraColorTexture");
         public static readonly int BoundingSphere = Shader.PropertyToID("_BoundingSphere");
+        public static readonly int CameraNearPlaneCorners = Shader.PropertyToID("_CameraNearPlaneCorners");
+        public static readonly int CameraFarPlaneCorners = Shader.PropertyToID("_CameraFarPlaneCorners");
     }
 }

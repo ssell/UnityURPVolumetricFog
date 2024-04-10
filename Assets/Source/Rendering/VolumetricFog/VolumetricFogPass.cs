@@ -13,6 +13,11 @@ namespace VertexFragment
         private static readonly List<FogVolume> FogVolumes = new List<FogVolume>();
 
         /// <summary>
+        /// Black with 0 alpha.
+        /// </summary>
+        private static readonly Color ColorNothing = new Color(0, 0, 0, 0);
+
+        /// <summary>
         /// Are there any fog volumes to render this frame?
         /// </summary>
         private static bool ShouldRender;
@@ -31,8 +36,6 @@ namespace VertexFragment
         /// The double-buffered render target. Is this needed anymore (to be double-buffered)?
         /// </summary>
         private BufferedRenderTargetReference BufferedFogRenderTarget;
-
-        private static readonly Color ColorNothing = new Color(0, 0, 0, 0);
 
         public VolumetricFogPass(VolumetricFogFeature.VolumetricFogSettings settings)
         {
@@ -55,9 +58,9 @@ namespace VertexFragment
                 return;
             }
 
-            if (BufferedFogRenderTarget == null)
+            if (HasCameraResized(ref renderingData))
             {
-                BufferedFogRenderTarget = new BufferedRenderTargetReference("_BufferedVolumetricFogRenderTarget");
+                BufferedFogRenderTarget = BufferedFogRenderTarget ?? new BufferedRenderTargetReference("_BufferedVolumetricFogRenderTarget");
                 BufferedFogRenderTarget.SetRenderTextureDescriptor(new RenderTextureDescriptor(
                     renderingData.cameraData.cameraTargetDescriptor.width / 2,
                     renderingData.cameraData.cameraTargetDescriptor.height / 2,
@@ -65,6 +68,8 @@ namespace VertexFragment
             }
 
             BufferedFogRenderTarget.Clear(commandBuffer, ColorNothing);
+
+            FogMaterialProperties.SetMatrix(ShaderIds.CameraNearPlaneCorners, renderingData.cameraData.camera.GetNearClipPlaneCornersMatrix());
         }
 
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
