@@ -90,7 +90,8 @@ namespace VertexFragment
                         continue;
                     }
 
-                    FogMaterialProperties.SetVector(ShaderIds.BoundingSphere, new Vector4(fogVolume.transform.position.x, fogVolume.transform.position.y, fogVolume.transform.position.z, fogVolume.Radius));
+                    fogVolume.Apply(FogMaterialProperties);
+
                     RasterizeColorToTarget(commandBuffer, BufferedFogRenderTarget.BackBuffer.Handle, FogMaterialInstance, BlitGeometry.Quad, 0, FogMaterialProperties);
                 }
 

@@ -119,12 +119,12 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _FogCutOff: 0.25
-    - _FogDensity: 0.75
+    - _FogDensity: 1.2
     - _FogDetailStrength: 0.4
     - _FogExponent: 1
     - _FogFadeEdge: 20
-    - _FogFadeY: 20
-    - _FogMaxY: 500
+    - _FogFadeY: 50
+    - _FogMaxY: 200
     - _FogProximityFade: 15
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -153,7 +153,7 @@ Material:
     - _DirectionalFogColor: {r: 1.4056604, g: 1.8816298, b: 2, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FogColor: {r: 0.5254902, g: 0.69803923, b: 0.67058825, a: 1}
-    - _FogSpeed: {r: 10, g: -1, b: -5, a: 0}
+    - _FogSpeed: {r: 35, g: -1, b: -5, a: 0}
     - _FogTiling: {r: 0.0015, g: 0.0015, b: 0.0015, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
