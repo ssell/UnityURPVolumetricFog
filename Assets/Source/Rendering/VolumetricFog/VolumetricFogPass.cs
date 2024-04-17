@@ -62,8 +62,8 @@ namespace VertexFragment
             {
                 BufferedFogRenderTarget = BufferedFogRenderTarget ?? new BufferedRenderTargetReference("_BufferedVolumetricFogRenderTarget");
                 BufferedFogRenderTarget.SetRenderTextureDescriptor(new RenderTextureDescriptor(
-                    renderingData.cameraData.cameraTargetDescriptor.width / 2,
-                    renderingData.cameraData.cameraTargetDescriptor.height / 2,
+                    renderingData.cameraData.cameraTargetDescriptor.width,
+                    renderingData.cameraData.cameraTargetDescriptor.height,
                     RenderTextureFormat.ARGB32, 0, 1), FilterMode.Bilinear, TextureWrapMode.Clamp);
             }
 

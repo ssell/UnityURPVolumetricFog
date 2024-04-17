@@ -196,6 +196,10 @@ Shader "VertexFragment/VolumetricFog"
             
             float4 FragMain(VertOutput input) : SV_Target
             {
+                // -------------------------------------------------------------------------
+                // 1. Setup and Raycast
+                // -------------------------------------------------------------------------
+
                 float3 rayOrigin = input.positionWS;
                 float3 rayDirection = normalize(rayOrigin - _WorldSpaceCameraPos.xyz);
 
@@ -213,6 +217,10 @@ Shader "VertexFragment/VolumetricFog"
                     return (float4)0;
                 }
 
+                // -------------------------------------------------------------------------
+                // 2. Raymarch Preparation
+                // -------------------------------------------------------------------------
+
                 float occludedDistance = worldDepth - rayHit.FrontHitDistance;
                 float nearestCutoff = min(occludedDistance * 5.0f, rayHit.Thickness);
 
@@ -223,19 +231,23 @@ Shader "VertexFragment/VolumetricFog"
                 float totalDistance = rayHit.FrontHitDistance;
                 float distanceMarched = Hash13(rayOrigin * 1337.0f * sin(_Time.y)) * -stepSize * 0.1f;        // Random offset to help reduce banding
 
-                float accumulation = 0.0f;
-                float shadowAccumulation = 0.0f;
-
                 Light light = GetMainLight();
                 float dotRaySun = pow(saturate(dot(rayDirection, light.direction)), _DirectionalFallExponent);
-                float4 fogColor = lerp(_FogColor, _DirectionalFogColor, dotRaySun);
                 float3 lightColor = lerp(lerp((float3)1, light.color, _LightContribution), lerp((float3)1, light.color, _DirectionalLightContribution), dotRaySun);
+                float4 fogColor = lerp(_FogColor, _DirectionalFogColor, dotRaySun);
 
                 float edgeFadeStart = sphereRadius - _FogFadeEdge;
                 float yFadeStart = _FogMaxY - _FogFadeY;
 
+                // -------------------------------------------------------------------------
+                // 3. Raymarch and Accumulation
+                // -------------------------------------------------------------------------
+
+                float accumulation = 0.0f;
+                float shadowAccumulation = 0.0f;
+
                 float currStepSize = stepSize;
-                float takingSmallSteps = 0.0f;
+                int takingSmallSteps = 0;
 
                 UNITY_LOOP
                 for (int i = 0; i < stepCount; ++i)
@@ -257,11 +269,11 @@ Shader "VertexFragment/VolumetricFog"
                     float4 fogDetail = pow(SAMPLE_TEXTURE3D(_NoiseTexture, sampler_NoiseTexture, detailFogUVW), _DetailFogExponent);
                     fog = (fog * (1.0f - _FogDetailStrength)) + (_FogDetailStrength * ((fogDetail.r * 0.6f) + (fogDetail.b * 0.25f) + (fogDetail.a * 0.15f)));
 
-                    if (fog > 0.1f && takingSmallSteps < 1.0f)
+                    if (fog > 0.1f && takingSmallSteps < 1)
                     {
                         currStepSize = stepSize * 0.2f;
                         distanceMarched -= currStepSize * 4.0f;
-                        takingSmallSteps = 1.0f;
+                        takingSmallSteps = 1;
                         continue;
                     }
 
@@ -269,21 +281,19 @@ Shader "VertexFragment/VolumetricFog"
 
                     fog *= yFade * edgeFade * proximityFade;
                     accumulation += fog * currStepSize;
-                    shadowAccumulation += currStepSize - (shadow * currStepSize);
-
-                    if ((distanceMarched > occludedDistance) || (distanceMarched > rayHit.Thickness))
-                    {
-                        break;
-                    }
+                    shadowAccumulation += (1.0f - shadow) * currStepSize;
                 }
 
-                accumulation = saturate(accumulation / distanceMarched) * _FogDensity;
+                // -------------------------------------------------------------------------
+                // 4. Finalization
+                // -------------------------------------------------------------------------
 
+                float totalAccumulation = saturate(accumulation / distanceMarched) * _FogDensity;
                 float totalShadow = 1.0f - (saturate(shadowAccumulation / distanceMarched) * lerp(_ShadowStrength * _ShadowReverseStrength, _ShadowStrength, dotRaySun));
                 float3 totalLighting = lightColor * totalShadow;
                 float3 ambientLighting = lightColor * 0.1f;
-                
-                return float4(fogColor.rgb * max(totalLighting, ambientLighting), fogColor.a * saturate(accumulation));
+
+                return float4(fogColor.rgb * max(totalLighting, ambientLighting), fogColor.a * saturate(totalAccumulation));
             }
 
             ENDHLSL

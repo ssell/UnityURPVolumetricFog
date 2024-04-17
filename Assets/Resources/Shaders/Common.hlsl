@@ -180,7 +180,7 @@ float3 GetRayDirection(float2 screenUV)
     // Perform aspect ratio correction.
     uv.x *= (_ScreenParams.x / _ScreenParams.y);
 
-    return normalize((uv.x * GetCameraRight()) + (uv.y * GetCameraUp()) + GetCameraForward());
+    return normalize((uv.x * GetCameraRight()) + (uv.y * GetCameraUp()) + GetCameraForward() * 1.5f);
 }
 
 // Note: Using GetCurrentViewPosition() instead of _WorldSpaceCameraPos as it will give camera or light position, depending on the shader.
