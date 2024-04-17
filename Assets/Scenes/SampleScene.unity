@@ -148,15 +148,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 117970624}
-  - {fileID: 523237044}
   - {fileID: 442206250}
   - {fileID: 696742523}
+  - {fileID: 117970624}
+  - {fileID: 523237044}
   - {fileID: 383337652}
-  - {fileID: 2052352089}
-  - {fileID: 1760638530}
   - {fileID: 654449787}
   - {fileID: 1635237102}
+  - {fileID: 2052352089}
+  - {fileID: 1760638530}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &117970624 stripped
@@ -796,7 +796,6 @@ GameObject:
   - component: {fileID: 545825986}
   - component: {fileID: 545825985}
   - component: {fileID: 545825984}
-  - component: {fileID: 545825983}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -804,37 +803,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
   m_IsActive: 1
---- !u!114 &545825983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545825982}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6af2d410bf489d842a543a60d605af5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  terrains:
-  - {fileID: 545825985}
-  splatmapResolution: 1024
-  colorMapResolution: 1024
-  layerSettings:
-  - enabled: 1
-    layer: {fileID: 8574412962073106934, guid: 59b98ca43f27d8c4a89d4058d2a962e5, type: 2}
-    modifierStack:
-    - {fileID: 1225185373}
-  - enabled: 1
-    layer: {fileID: 8574412962073106934, guid: c997c17aa360cb749a27932fe3bdfcce, type: 2}
-    modifierStack: []
-  autoRepaint: 0
-  terrainListeners: []
-  bounds:
-    m_Center: {x: 1024, y: 1000, z: 1024}
-    m_Extent: {x: 1024, y: 1000, z: 1024}
-  msTexArray: {fileID: 0}
-  filterShader: {fileID: 4800000, guid: 0f44df78e3d64d9cb2616cac3d84cb77, type: 3}
 --- !u!154 &545825984
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -1028,26 +996,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1225185373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2562637f396e4c10acd3fa9926b53a12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enabled: 1
-  label: Slope
-  blendMode: 0
-  opacity: 100
-  passIndex: 1
-  minMax: {x: 0, y: 3}
-  minFalloff: 3
-  maxFalloff: 3
 --- !u!1001 &1339926781
 PrefabInstance:
   m_ObjectHideFlags: 0
